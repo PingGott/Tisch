@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Collision : MonoBehaviour
+public class ToolSlot : MonoBehaviour
 {
-    [Tooltip("Tag des richtigen Werkzeugs für diese Fläche")]
-    public string correctToolTag;
+    [Tooltip("Tag des Werkzeugs, das hier reinpasst")]
+    public string correctToolTag = "Hammer";
 
-    [Tooltip("Referenz auf den GameManager")]
+    [Tooltip("Referenz zum GameManager")]
     public ToolGameManager gameManager;
 
     private bool isCorrect = false;
@@ -15,8 +15,8 @@ public class Collision : MonoBehaviour
         if (other.CompareTag(correctToolTag))
         {
             isCorrect = true;
-            Debug.Log($"{name}: {other.tag} ist korrekt!");
-            gameManager.CheckAllTriggers();
+            Debug.Log($"{name}: {other.name} ist richtig platziert!");
+            gameManager.CheckAllTools();
         }
     }
 
@@ -25,8 +25,8 @@ public class Collision : MonoBehaviour
         if (other.CompareTag(correctToolTag))
         {
             isCorrect = false;
-            Debug.Log($"{name}: {other.tag} wurde entfernt!");
-            gameManager.CheckAllTriggers();
+            Debug.Log($"{name}: {other.name} wurde entfernt!");
+            gameManager.CheckAllTools();
         }
     }
 

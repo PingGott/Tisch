@@ -1,28 +1,37 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ToolGameManager : MonoBehaviour
 {
-    public Collision[] toolTriggers; 
+    [Header("Alle Tool-Slots hier reinziehen")]
+    public ToolSlot[] toolSlots;       
+
     public AudioSource successSound;
 
     private bool hasPlayed = false;
 
-    public void CheckAllTriggers()
+    public void CheckAllTools()
     {
-        foreach (Collision trigger in toolTriggers)
+        foreach (ToolSlot slot in toolSlots)
         {
-            if (!trigger.IsCorrect())
+            if (!slot.IsCorrect())
             {
-                hasPlayed = false;
+                hasPlayed = false;    
                 return;
             }
         }
 
+        
         if (!hasPlayed)
         {
             successSound.Play();
-            Debug.Log(" Alle Werkzeuge liegen richtig!");
+            Debug.Log("✓ ALLE WERKZEUGE SIND RICHTIG PLATZIERT! ✓");
             hasPlayed = true;
         }
+    }
+
+   
+    public void ResetPuzzle()
+    {
+        hasPlayed = false;
     }
 }
